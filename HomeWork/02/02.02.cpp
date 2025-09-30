@@ -5,49 +5,53 @@
 // вольный поток ввода std::cin для ввода коэффициентов a, b и c. Используйте стандартныйсимвольныйпо-
 // токвыводаstd::cout длявыводакорнейуравнения.НесопровождайтеВашерешениеданнойзадачитестами.
 
-
 #include <iostream>
+#include <cmath>
 
 int main()
 {
-  double a = 0;
-  double b = 0;
-  double c = 0;
-  double const epsilon = 1e-6;
+  double a = 0.0;
+  double b = 0.0;
+  double c = 0.0;
+  const double epsilon = 1e-6;
 
   std::cin >> a >> b >> c;
 
   if (std::abs(a) < epsilon)
   {
-   if (std::abs(b) < epsilon)
-   {
-     if (std::abs(c) < epsilon)
-     {
-       std::cout << "any x" << '\n';
-     } else
-       {
-       std::cout << "no solutions" << '\n';
-       }
-   } else
-     {
-     std::cout << 1.0 * -c / b << '\n';
-     }
-  } else
+    if (std::abs(b) < epsilon)
     {
-    double determinant = b * b - 4 * a * c;
-    if (determinant < -epsilon) {
-      std::cout << "not real solutions" << '\n';
-    } else
+      if (std::abs(c) < epsilon)
       {
-      if (std::abs(determinant) < epsilon)
+        std::cout << "any x\n";
+      }
+      else
       {
-        std::cout << "solution: " << -b / 2.0 * a << '\n';
-      } else
-        {
-        double first_sol = (-b + std::sqrt(determinant)) / 2 * a;
-        double second_sol = (-b - std::sqrt(determinant)) / 2 * a;
-        std::cout << "first sol: " << first_sol << '\n' << "second sol: " << second_sol << '\n';
-        }
+        std::cout << "no solutions\n";
       }
     }
+    else
+    {
+      std::cout << -c / b << '\n';
+    }
+  }
+  else
+  {
+    double discriminant = b * b - 4.0 * a * c;
+    if (discriminant < -epsilon)
+    {
+      std::cout << "no real solutions\n";
+    }
+    else if (std::abs(discriminant) < epsilon)
+    {
+      std::cout << -b / (2.0 * a) << '\n';
+    }
+    else
+    {
+      double sqrt_d = std::sqrt(discriminant);
+      double first_sol = (-b + sqrt_d) / (2.0 * a);
+      double second_sol = (-b - sqrt_d) / (2.0 * a);
+      std::cout << first_sol << '\n' << second_sol << '\n';
+    }
+  }
 }
