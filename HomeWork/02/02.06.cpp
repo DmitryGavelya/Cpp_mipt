@@ -1,4 +1,5 @@
 #include <iostream>
+#include <cmath>
 
 // на семинаре
 
@@ -24,5 +25,4 @@ int main() {
   s = std::sqrt(s / size);
 
   std::cout << min << ' ' << max << ' ' << avg << ' ' << s << '\n';
-
 }
