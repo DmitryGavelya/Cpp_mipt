@@ -79,7 +79,6 @@ public:
 
     void push_back(int value)
     {
-        // Если места нет, увеличиваем емкость
         if (m_size >= m_capacity)
         {
             reserve(m_capacity == 0 ? 1 : m_capacity * 2);
@@ -93,7 +92,6 @@ public:
 
     void clear()
     {
-        // Удаляем все элементы, но не освобождаем память
         m_size = 0;
     }
 

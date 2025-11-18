@@ -53,7 +53,15 @@ class IPv4 {
       }
 
     friend bool operator<(const IPv4& lhs, const IPv4& rhs) {
-        return lhs.data < rhs.data;
+        for (size_t i = 0; i < 4; ++i) {
+          if (lhs.data[i] < rhs.data[i]) {
+            return true;
+          }
+          if (lhs.data[i] > rhs.data[i]) {
+            return false;
+          }
+        }
+        return false;
       }
 
     friend bool operator>(const IPv4& lhs, const IPv4& rhs) {

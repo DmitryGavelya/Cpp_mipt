@@ -3,7 +3,7 @@
 template <int X> struct Fibonacci {
   static_assert(X >= 1, "N must be positive");
 
-  static_assert(Fibonacci<X-1>::value <= (std::numeric_limits<int>::max() - Fibonacci<X-2>::value),
+  static_assert(Fibonacci<X - 1>::value <= (std::numeric_limits<int>::max() - Fibonacci<X - 2>::value),
                 "Integer overflow");
   static constexpr int value = Fibonacci<X - 1> ::value + Fibonacci<X - 2> :: value;
 };
