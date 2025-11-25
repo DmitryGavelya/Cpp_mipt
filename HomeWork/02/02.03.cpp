@@ -8,38 +8,42 @@
 #include <iostream>
 
 int main() {
-  int n;
-  std::cin >> n;
-  switch (auto y = n; y) {
-  case 65: case 66: case 67: case 68: case 69: case 70:
-  case 71: case 72: case 73: case 74: case 75: case 76:
-  case 77: case 78: case 79: case 80: case 81: case 82:
-  case 83: case 84: case 85: case 86: case 87: case 88:
-  case 89: case 90:
+  char c;
+  std::cin >> c;
+
+  switch (c) {
+  case 'A': case 'B': case 'C': case 'D': case 'E': case 'F':
+  case 'G': case 'H': case 'I': case 'J': case 'K': case 'L':
+  case 'M': case 'N': case 'O': case 'P': case 'Q': case 'R':
+  case 'S': case 'T': case 'U': case 'V': case 'W': case 'X':
+  case 'Y': case 'Z':
     std::cout << "capital letters";
     break;
 
-  case 97: case 98: case 99: case 100: case 101: case 102:
-  case 103: case 104: case 105: case 106: case 107: case 108:
-  case 109: case 110: case 111: case 112: case 113: case 114:
-  case 115: case 116: case 117: case 118: case 119: case 120:
-  case 121: case 122:
+  case 'a': case 'b': case 'c': case 'd': case 'e': case 'f':
+  case 'g': case 'h': case 'i': case 'j': case 'k': case 'l':
+  case 'm': case 'n': case 'o': case 'p': case 'q': case 'r':
+  case 's': case 't': case 'u': case 'v': case 'w': case 'x':
+  case 'y': case 'z':
     std::cout << "lower letters";
     break;
 
-  case 49: case 50: case 51: case 52: case 53:
-  case 54: case 55: case 56: case 57:
+  case '0': case '1': case '2': case '3': case '4':
+  case '5': case '6': case '7': case '8': case '9':
     std::cout << "numbers";
     break;
 
-  case 33: case 34: case 35: case 36: case 37: case 38:
-  case 39: case 40: case 41: case 42: case 43: case 44:
-  case 45: case 46: case 47:
+  case '!': case '"': case '#': case '$': case '%': case '&': case '\'':
+  case '(': case ')': case '*': case '+': case ',': case '-': case '.':
+  case '/':
+  case ':': case ';': case '<': case '=': case '>': case '?': case '@':
+  case '[': case '\\': case ']': case '^': case '_': case '`':
+  case '{': case '|': case '}': case '~':
     std::cout << "punctuation marks";
     break;
 
   default:
-    std::cout << "other digital";
+    std::cout << "other";
     break;
   }
 }

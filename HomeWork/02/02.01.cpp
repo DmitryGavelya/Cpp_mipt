@@ -7,6 +7,7 @@
 // вода std::cout для вывода числа ряда Фибоначчи. Не сопровождайте Ваше решение данной задачи тестами
 
 #include <iostream>
+#include <cmath>
 
 int main() {
     int n;
@@ -16,5 +17,5 @@ int main() {
     double second_part = pow((1 - sqrt(5)) / 2, n);
     double answer = (first_part - second_part) / sqrt(5);
 
-    std::cout << static_cast<int>(answer) << '\n';
+    std::cout << static_cast<int> (answer) << '\n';
 }
