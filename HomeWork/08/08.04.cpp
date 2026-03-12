@@ -42,6 +42,9 @@ int main() {
 
     std::string current = random_string(target.size());
 
+    std::vector<std::string> population;
+    population.reserve(population_size);
+
     std::size_t generation = 0;
     while (true) {
         std::cout << "gen " << generation << ": " << current << '\n';
@@ -49,8 +52,7 @@ int main() {
         if (current == target)
             break;
 
-        std::vector<std::string> population;
-        population.reserve(population_size);
+        population.clear();
         for (std::size_t i = 0; i < population_size; ++i)
             population.push_back(mutate(current));
 
