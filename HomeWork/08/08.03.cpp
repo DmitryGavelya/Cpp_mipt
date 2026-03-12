@@ -2,10 +2,11 @@
 #include <iostream>
 #include <cstdint>
 #include <cmath>
+#include <optional>
 #include <gtest/gtest.h>
 
-int ilog2_int(int x) {
-  if (x <= 0) return -1;
+std::optional<int> ilog2_int(int x) {
+  if (x <= 0) return std::nullopt;
   unsigned int u = static_cast<unsigned int>(x);
 
   int res = -1;
@@ -16,7 +17,7 @@ int ilog2_int(int x) {
   return res;
 }
 
-int ilog2_float(float f) {
+std::optional<int> ilog2_float(float f) {
   union {
     float f;
     std::uint32_t u;
@@ -29,14 +30,14 @@ int ilog2_float(float f) {
   std::uint32_t mant =  v.u & 0x7FFFFFu;
 
   if (sign || exp == 0xFFu || (exp == 0 && mant == 0))
-    return -1;
+    return std::nullopt;
 
   if (exp == 0) {
     int shift = 0;
     while ((mant & (1u << 22)) == 0) {
       mant <<= 1;
       ++shift;
-      if (shift > 23) return -1;
+      if (shift > 23) return std::nullopt;
     }
     int e = 1 - 127 - shift;
     return e;
@@ -47,17 +48,22 @@ int ilog2_float(float f) {
 }
 
 TEST(Ilog2IntTest, BasicCases) {
-  EXPECT_EQ(ilog2_int(1), 0);
-  EXPECT_EQ(ilog2_int(2), 1);
-  EXPECT_EQ(ilog2_int(8), 3);
-  EXPECT_EQ(ilog2_int(1024), 10);
+  EXPECT_EQ(ilog2_int(1).value(), 0);
+  EXPECT_EQ(ilog2_int(2).value(), 1);
+  EXPECT_EQ(ilog2_int(8).value(), 3);
+  EXPECT_EQ(ilog2_int(1024).value(), 10);
+
+  EXPECT_FALSE(ilog2_int(0).has_value());
+  EXPECT_FALSE(ilog2_int(-5).has_value());
 }
 
 TEST(Ilog2FloatTest, BasicCases) {
-  EXPECT_EQ(ilog2_float(1.0f), 0);
-  EXPECT_EQ(ilog2_float(2.0f), 1);
-  EXPECT_EQ(ilog2_float(0.5f), -1);
-  EXPECT_EQ(ilog2_float(0.25f), -2);
+  EXPECT_EQ(ilog2_float(1.0f).value(), 0);
+  EXPECT_EQ(ilog2_float(2.0f).value(), 1);
+  EXPECT_EQ(ilog2_float(0.5f).value(), -1);
+  EXPECT_EQ(ilog2_float(0.25f).value(), -2);
+  EXPECT_FALSE(ilog2_float(0.0f).has_value());
+  EXPECT_FALSE(ilog2_float(-1.0f).has_value());
 }
 
 int main(int argc, char **argv) {
